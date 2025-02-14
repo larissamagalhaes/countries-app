@@ -11,9 +11,10 @@ class CountryDetailsViewModel: ObservableObject {
 
 	@Published var name = ""
 	@Published var flag = ""
-	@Published var capital = ""
-	@Published var continent = ""
-	@Published var population = ""
+	@Published var capital = "-"
+	@Published var continent = "-"
+	@Published var population = "-"
+	@Published var showErrorView = false
 	
 	private let getCountryUseCase: GetCountryUseCaseProtocol
 	
@@ -26,13 +27,14 @@ class CountryDetailsViewModel: ObservableObject {
 		Task {
 			do {
 				let result = try await self.getCountryUseCase.execute()
-				self.name = result.name
-				self.capital = result.capital
-				self.flag = result.flag
-				self.continent = result.continent
-				self.population = result.population
+				self.name = result.name.isEmpty ? "Unknown" : result.name
+				self.capital = result.capital.isEmpty ? "Unknown" : result.capital
+				self.flag = result.flag.isEmpty ? "Unknown" : result.flag
+				self.continent = result.continent.isEmpty ? "Unknown" : result.continent
+				self.population = result.population.isEmpty ? "Unknown" : result.population
+				self.showErrorView = false
 			} catch {
-				print("😱 Error: \(error)")
+				self.showErrorView = true
 			}
 			
 		}

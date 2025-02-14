@@ -14,7 +14,7 @@ enum Endpoint {
 	var url: URL {
 		var urlComponents = URLComponents(string: "\(self.baseURL)\(self.path)")
 		urlComponents?.queryItems = self.parameters
-		guard let url = urlComponents?.url else {fatalError("Error creating url")  }
+		guard let url = urlComponents?.url else { fatalError("Error creating url")  }
 		return url
 	}
 	

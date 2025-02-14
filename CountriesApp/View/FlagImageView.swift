@@ -14,13 +14,21 @@ struct FlagImageView: View {
 	let height: CGFloat
 	
     var body: some View {
-		AsyncImage(url: URL(string: self.url)) { image in
-			image.resizable()
-				.frame(width: self.width, height: self.height)
-				.aspectRatio(contentMode: .fill)
-				.clipShape(RoundedRectangle(cornerRadius: 5))
-		} placeholder: {
-			ProgressView()
+		AsyncImage(url: URL(string: self.url)) { phase in
+			
+			if let image = phase.image {
+				image
+					.resizable()
+					.aspectRatio(contentMode: .fill)
+					.frame(width: self.width, height: self.height)
+					.clipShape(RoundedRectangle(cornerRadius: 5))
+			} else if phase.error != nil {
+				Image("image-error")
+					.frame(width: self.height, height: self.height)
+					.clipShape(RoundedRectangle(cornerRadius: 5))
+			} else {
+				ProgressView()
+			}
 		}
 		.overlay(
 			RoundedRectangle(cornerRadius: 5)

@@ -13,8 +13,22 @@ struct CountryListView: View {
 	
 	var body: some View {
 		NavigationStack {
+			self.setupView()
+			.navigationTitle("Countries")
+			.onAppear() {
+				self.viewModel.bind()
+			}
+		}
+	}
+	
+	@ViewBuilder
+	private func setupView() -> some View {
+		switch viewModel.currentState {
+		case .loading:
+			ProgressView()
+		case .loaded:
 			List {
-				ForEach($viewModel.countryItemViewModel, id: \.name) { $item in
+				ForEach($viewModel.showCountryDetail, id: \.name) { $item in
 					CountryItemView(viewModel: item)
 						.onTapGesture {
 							self.viewModel.showCountry(item.name)
@@ -29,10 +43,8 @@ struct CountryListView: View {
 						.presentationDetents([.medium])
 				}
 			}
-			.navigationTitle("Countries")
-			.onAppear() {
-				self.viewModel.bind()
-			}
+		case .error:
+			ErrorView()
 		}
 	}
 }

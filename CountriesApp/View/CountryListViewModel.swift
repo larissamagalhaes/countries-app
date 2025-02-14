@@ -9,9 +9,10 @@ import Foundation
 
 class CountryListViewModel: ObservableObject {
 	
-	@Published var countryItemViewModel: [CountryItemViewModel] = []
+	@Published var showCountryDetail: [CountryItemViewModel] = []
 	@Published var showSheet = false
 	var selectedCountryViewModel: CountryDetailsViewModel?
+	@Published var currentState: State = .loading
 	
 	private let getCountriesUseCase: GetCountriesUseCaseProtocol
 	
@@ -23,10 +24,11 @@ class CountryListViewModel: ObservableObject {
 	func bind() {
 		Task {
 			do {
-				try await self.countryItemViewModel = self.getCountriesUseCase.execute()
+				try await self.showCountryDetail = self.getCountriesUseCase.execute()
 					.map { CountryItemViewModel(name: $0.name, flag: $0.flag) }
+				self.currentState = .loaded
 			} catch {
-				print("😱 Error: \(error)")
+				self.currentState = .error
 			}
 			
 		}
@@ -40,5 +42,14 @@ class CountryListViewModel: ObservableObject {
 	
 	func dismissDetails() {
 		self.showSheet = false
+	}
+}
+
+extension CountryListViewModel {
+	
+	enum State {
+		case loading
+		case loaded
+		case error
 	}
 }
