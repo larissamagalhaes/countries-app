@@ -8,8 +8,8 @@
 import Foundation
 
 class CountryItemViewModel {
-	@Published var name = ""
-	@Published var flag = ""
+	let name: String
+	let flag: String
 	
 	init(name: String, flag: String) {
 		self.name = name

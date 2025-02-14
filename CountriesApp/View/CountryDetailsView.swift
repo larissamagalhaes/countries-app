@@ -15,14 +15,7 @@ struct CountryDetailsView: View {
 		VStack(alignment: .leading) {
 			Text(self.viewModel.name)
 				.font(.title2)
-			AsyncImage(url: URL(string: self.viewModel.flag)) { image in
-				image.resizable()
-			} placeholder: {
-				ProgressView()
-			}
-			.frame(width: 350, height: 175)
-			.clipShape(.rect(cornerRadius: 5))
-			.aspectRatio(contentMode: .fill)
+			FlagImageView(url: self.viewModel.flag, width: 300, height: 175)
 			
 			self.createItem(title: "Capital:",
 							body: self.viewModel.capital)
