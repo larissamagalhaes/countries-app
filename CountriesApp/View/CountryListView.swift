@@ -8,19 +8,24 @@
 import SwiftUI
 
 struct CountryListView: View {
+	
+	@ObservedObject var viewModel: CountryListViewModel
+	
 	var body: some View {
 		NavigationStack {
 			List {
-				CountryItemView(viewModel: .init(name: "Test", flag: "https://flagcdn.com/w320/gs.png"))
-				CountryItemView(viewModel: .init(name: "Test", flag: "https://flagcdn.com/w320/gs.png"))
-				CountryItemView(viewModel: .init(name: "Test", flag: "https://flagcdn.com/w320/gs.png"))
-				CountryItemView(viewModel: .init(name: "Test", flag: "https://flagcdn.com/w320/gs.png"))
+				ForEach($viewModel.countryItemViewModel, id: \.name) { $item in
+					CountryItemView(viewModel: item)
+				}
 			}
-			.navigationTitle("Menu")
+			.navigationTitle("Countries")
+			.onAppear() {
+				self.viewModel.bind()
+			}
 		}
 	}
 }
 
 #Preview {
-	CountryListView()
+	CountryListView(viewModel: .init(getCountriesUseCase: GetCountriesRepository()))
 }

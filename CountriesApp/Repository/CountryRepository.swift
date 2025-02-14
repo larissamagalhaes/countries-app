@@ -14,7 +14,7 @@ class CountryRepository: CountryRepositoryProtocol {
 
 	private let remoteDataSource: CountryDataSource
 	
-	init(remoteDataSource: CountryDataSource) {
+	init(remoteDataSource: CountryDataSource = CountryRemoteDataSource()) {
 		self.remoteDataSource = remoteDataSource
 	}
 	

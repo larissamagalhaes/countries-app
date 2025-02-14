@@ -9,7 +9,7 @@ class CountryRemoteDataSource: CountryDataSource {
 	
 	private let networkManager: NetworkManager
 	
-	init(networkManager: NetworkManager) {
+	init(networkManager: NetworkManager = .init()) {
 		self.networkManager = networkManager
 	}
 
