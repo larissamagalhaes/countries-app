@@ -16,6 +16,17 @@ struct CountryListView: View {
 			List {
 				ForEach($viewModel.countryItemViewModel, id: \.name) { $item in
 					CountryItemView(viewModel: item)
+						.onTapGesture {
+							self.viewModel.showCountry(item.name)
+						}
+				}
+			}
+			.sheet(isPresented: self.$viewModel.showSheet) {
+				self.viewModel.dismissDetails()
+			} content: {
+				if let selectedCountryViewModel = viewModel.selectedCountryViewModel {
+					CountryDetailsView(viewModel: selectedCountryViewModel)
+						.presentationDetents([.medium])
 				}
 			}
 			.navigationTitle("Countries")

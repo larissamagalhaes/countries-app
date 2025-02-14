@@ -20,6 +20,7 @@ struct CountryItemView: View {
 			}
 			.frame(width: 100, height: 50)
 			.clipShape(.rect(cornerRadius: 5))
+			.aspectRatio(contentMode: .fill)
 			Text(self.viewModel.name)
 		}
     }

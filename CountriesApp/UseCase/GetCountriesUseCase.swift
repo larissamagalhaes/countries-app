@@ -6,7 +6,7 @@
 //
 
 protocol GetCountriesUseCaseProtocol {
-	func execute() async throws -> [Country]
+	func execute() async throws -> [CountrySimple]
 }
 
 class GetCountriesRepository: GetCountriesUseCaseProtocol {
@@ -17,7 +17,9 @@ class GetCountriesRepository: GetCountriesUseCaseProtocol {
 		self.repository = repository
 	}
 	
-	func execute() async throws -> [Country] {
-		try await self.repository.getCountries().sorted(by: { $0.name < $1.name })
+	func execute() async throws -> [CountrySimple] {
+		try await self.repository.getCountries()
+			.map { CountrySimple(name: $0.name, flag: $0.flagURL) }
+			.sorted(by: { $0.name < $1.name })
 	}
 }

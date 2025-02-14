@@ -10,6 +10,8 @@ import Foundation
 class CountryListViewModel: ObservableObject {
 	
 	@Published var countryItemViewModel: [CountryItemViewModel] = []
+	@Published var showSheet = false
+	var selectedCountryViewModel: CountryDetailsViewModel?
 	
 	private let getCountriesUseCase: GetCountriesUseCaseProtocol
 	
@@ -17,15 +19,26 @@ class CountryListViewModel: ObservableObject {
 		self.getCountriesUseCase = getCountriesUseCase
 	}
 	
+	@MainActor
 	func bind() {
-				Task {
+		Task {
 			do {
 				try await self.countryItemViewModel = self.getCountriesUseCase.execute()
-					.map { CountryItemViewModel(name: $0.name, flag: $0.flagURL) }
+					.map { CountryItemViewModel(name: $0.name, flag: $0.flag) }
 			} catch {
 				print("😱 Error: \(error)")
 			}
 			
 		}
+	}
+	
+	func showCountry(_ name: String) {
+		self.showSheet = true
+		let getCountryUseCase = GetCountryUseCase(name: name)
+		self.selectedCountryViewModel = CountryDetailsViewModel(getCountryUseCase: getCountryUseCase)
+	}
+	
+	func dismissDetails() {
+		self.showSheet = false
 	}
 }

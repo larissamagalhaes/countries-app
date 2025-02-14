@@ -18,6 +18,11 @@ class CountryRemoteDataSource: CountryDataSource {
 	}
 	
 	func fetchCountry(by name: String) async throws -> Country {
-		try await self.networkManager.request(model: Country.self, endpoint: .name(name))
+		guard let country = try await self.networkManager
+			.request(model: [Country].self, endpoint: .name(name))
+			.first else {
+			throw APIError.invalidEndpoint
+		}
+		return country
 	}
 }
