@@ -5,9 +5,8 @@ Error handling has been implemented by showing an error view, providing a clear 
 
 In my daily workflow, I focus on keeping the architecture modular and clean to simplify future improvements and debugging.
 
-- [Demo](https://github.com/larissamagalhaes/countries-app/tree/3157ab8558a68bdd1afbd77ab3ad5eb0fccdcd47/Demo/Demo.mov)
-- [Demo - Details error page](https://github.com/larissamagalhaes/countries-app/tree/3157ab8558a68bdd1afbd77ab3ad5eb0fccdcd47/Demo/DemoDetailsError.mov)
-- [Demo - Main error page](https://github.com/larissamagalhaes/countries-app/tree/3157ab8558a68bdd1afbd77ab3ad5eb0fccdcd47/Demo/DemError.mov)
+## Demo
+You can find some demo examples related to the challenge in this folder: [Demo](https://github.com/larissamagalhaes/countries-app/tree/3157ab8558a68bdd1afbd77ab3ad5eb0fccdcd47/Demo).
 
 ### Application Design
 - Networking uses the Repository pattern with local (Cache) and remote (API) data sources.
@@ -22,8 +21,6 @@ XCode Version 16.2 and iOS 18.2
 
 ## Steps to run the app
 Download the zip and run
-
-## Demo
 
 
 
