@@ -5,7 +5,8 @@
 //  Created by Larissa Magalhaes on 2025-02-14.
 //
 
-struct CountrySimple {
+/// Representation of the data necessary to populate the CountryItemView.
+struct CountrySimple: Equatable {
 	let name: String
 	let flag: String
 }

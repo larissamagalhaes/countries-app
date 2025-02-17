@@ -7,10 +7,12 @@
 
 import Foundation
 
+/// Represents API endpoints for fetching country information.
 enum Endpoint {
 	case all
 	case name(String)
 	
+	/// Constructs the full URL for the API request.
 	var url: URL {
 		var urlComponents = URLComponents(string: "\(self.baseURL)\(self.path)")
 		urlComponents?.queryItems = self.parameters

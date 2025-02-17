@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Sends an asynchronous network request and decodes the response into a specified model.
 class NetworkManager {
 	
 	func request<T:Decodable>(model: T.Type,

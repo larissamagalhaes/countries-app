@@ -50,5 +50,5 @@ struct CountryListView: View {
 }
 
 #Preview {
-	CountryListView(viewModel: .init(getCountriesUseCase: GetCountriesRepository()))
+	CountryListView(viewModel: .init(getCountriesUseCase: GetCountriesUseCase()))
 }

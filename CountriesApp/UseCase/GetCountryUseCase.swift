@@ -5,7 +5,15 @@
 //  Created by Larissa Magalhaes on 2025-02-14.
 //
 
+/// A protocol that defines the use case for retrieving detailed information about a country.
+///
+/// Implementers of this protocol are responsible for fetching country-specific details,
+/// which may come from a remote service, local database, or other sources.
 protocol GetCountryUseCaseProtocol {
+	/// Retrieves detailed information about a country.
+	///
+	/// - Returns: A `CountryDetail` object containing information about the country.
+	/// - Throws: An error if the operation fails.
 	func execute() async throws -> CountryDetail
 }
 

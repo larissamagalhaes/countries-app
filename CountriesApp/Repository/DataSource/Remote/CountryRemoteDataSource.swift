@@ -5,6 +5,7 @@
 //  Created by Larissa Magalhaes on 2025-02-14.
 //
 
+/// Class responsible for fetching country data from api
 class CountryRemoteDataSource: CountryDataSource {
 	
 	private let networkManager: NetworkManager

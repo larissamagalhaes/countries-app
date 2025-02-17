@@ -5,7 +5,7 @@
 //  Created by Larissa Magalhaes on 2025-02-14.
 //
 
-struct Country: Decodable {
+struct Country: Decodable, Equatable {
 	let name: String
 	let flagURL: String
 	let capitals: [String]
@@ -33,10 +33,10 @@ extension Country {
 	}
 }
 
-struct NameResponse: Codable {
+struct NameResponse: Codable, Equatable {
 	let common: String
 }
 
-struct FlagResponse: Codable {
+struct FlagResponse: Codable, Equatable {
 	let png: String
 }
